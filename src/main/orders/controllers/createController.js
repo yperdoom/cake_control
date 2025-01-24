@@ -2,7 +2,7 @@ module.exports = async (requisition, response, next) => {
   const body = requisition.body
 
 
-  const order = await createWallet(body)
+  const order = await createOrder(body)
 
   if (order) {
     return response.send({
