@@ -1,7 +1,6 @@
 module.exports = async (requisition, response, next) => {
   const body = requisition.body
 
-
   const stock = await createStock(body)
 
   if (stock) {
