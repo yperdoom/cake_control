@@ -1,19 +1,20 @@
-module.exports = async (requisition, response, next) => {
-  const body = requisition.body
+import { connect, disconnect } from '../../../database/mongodb.js';
+import createOrder from '../services/createOrder.js'
 
+export default async (req, res, next) => {
+  const { body } = req
 
-  const order = await createOrder(body)
+  try {
+    await connect();
+    const order = await createOrder(body)
+    await disconnect();
 
-  if (order) {
-    return response.send({
-      success: true,
-      message: "Carteira criada com sucesso",
-      body: order
-    })
+    res.status(201).json({
+      message: 'Pedido criado com sucesso.',
+      order
+    });
+  } catch (error) {
+    Object.assign(error, { customMessage: 'Erro ao criar pedido.' })
+    next(error);
   }
-
-  return response.send({
-    success: false,
-    message: "Não foi possível criar a carteira"
-  })
 }

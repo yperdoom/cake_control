@@ -1,20 +1,18 @@
 // imports
-const getControllers = require('../controllers/getController')
-const createController = require('../controllers/createController')
-const putController = require('../controllers/putController')
-const deleteController = require('../controllers/deleteController')
+import getControllers from '../controllers/getController.js'
+import createController from '../controllers/createController.js'
+import editController from '../controllers/editController.js'
+import deleteController from '../controllers/deleteController.js'
 
 // routes
-module.exports = (api) => {
-  api.get('/order/:orders_id', getControllers)
+export default (api) => {
+  api.get('/order/:order_id', getControllers)
 
   api.get('/orders', getControllers)
 
   api.post('/order', createController)
 
-  api.put('/order/:orders_id', putController)
+  api.put('/order/:orders_id', editController)
 
   api.delete('/order/:orders_id', deleteController)
-
-  return api
 }

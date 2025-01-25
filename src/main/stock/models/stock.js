@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+import { Schema as _Schema, model } from 'mongoose'
+const Schema = _Schema
 
 const StockSchema = new Schema({
   name: {
@@ -9,13 +9,14 @@ const StockSchema = new Schema({
     type: String
   },
   quantity_in_stock: {
-    type: Int32,
+    type: Number,
     required: true
   },
   type_of_quantity: {
     type: String,
     required: true,
-    enum: ['unit']
+    enum: ['unit'],
+    default: 'unit'
   },
 }, {
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
@@ -25,4 +26,4 @@ const StockSchema = new Schema({
 
 StockSchema.index({ name: 'text' }, { default_language: 'pt-br' })
 
-module.exports = mongoose.model('stock', StockSchema)
+export default model('stock', StockSchema)

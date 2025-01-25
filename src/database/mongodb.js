@@ -1,14 +1,16 @@
-require('dotenv/config')
+import 'dotenv/config'
 const {
   MONGO_ENDPOINT: mongo_endpoint
 } = process.env
 
-const { connect, disconnect } = require('./mongooseConfiguration')
+import { connect, disconnect } from './mongooseConfiguration.js'
 
-module.exports.connect = async () => {
+const _connect = async () => {
   await connect({ mongo_endpoint })
 }
+export { _connect as connect }
 
-module.exports.disconnect = async () => {
+const _disconnect = async () => {
   await disconnect({ mongo_endpoint })
 }
+export { _disconnect as disconnect }

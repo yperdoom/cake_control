@@ -1,10 +1,11 @@
 // imports
-const bodyParser = require('body-parser')
-const express = require('express')
-const cors = require('cors')
+import bodyParserPkg from 'body-parser'
+const { json, urlencoded } = bodyParserPkg
+import express from 'express'
+import cors from 'cors'
 const api = express()
 
-api.use(bodyParser.json())
+api.use(json())
 api.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
@@ -12,9 +13,9 @@ api.use((req, res, next) => {
   next()
 })
 api.use(
-  bodyParser.urlencoded({
+  urlencoded({
     extended: true
   })
 )
 
-module.exports = api
+export default api

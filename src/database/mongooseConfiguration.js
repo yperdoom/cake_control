@@ -1,14 +1,15 @@
-const Logger = require('../library/function/Logger')
-const mongoose = require('mongoose');
+import Logger from '../library/function/Logger.js';
+import mongoose from 'mongoose';
 mongoose.set('strictQuery', false);
 
+let conn = null;
 /**
  * Connect to mongo db with mongoose
  * @param {Object} params 
  * @param {String} params.mongo_endpoint 
  * @returns 
  */
-module.exports.connect = async ({ mongo_endpoint }) => {
+export async function connect({ mongo_endpoint }) {
   if (conn == null) {
     try {
       conn = await mongoose.connect(mongo_endpoint)
@@ -31,7 +32,7 @@ module.exports.connect = async ({ mongo_endpoint }) => {
  * @param {String} params.mongo_endpoint 
  * @returns 
  */
-module.exports.disconnect = async ({ mongo_endpoint }) => {
+export async function disconnect({ mongo_endpoint }) {
   try {
     await mongoose.disconnect(mongo_endpoint)
     conn = null
