@@ -1,6 +1,5 @@
 const defaultMongoOperation = {
-  lean: true,
-  limit: 10
+  lean: true
 }
 
 export default defaultMongoOperation

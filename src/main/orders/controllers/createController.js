@@ -9,7 +9,7 @@ export default async (req, res, next) => {
     const order = await createOrder(body)
     await disconnect();
 
-    res.status(201).json({
+    return res.status(201).json({
       message: 'Pedido criado com sucesso.',
       order
     });

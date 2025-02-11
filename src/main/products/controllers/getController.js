@@ -25,7 +25,7 @@ export default async (req, res, next) => {
       });
     }
 
-    return res.json({
+    res.json({
       message: 'Operação concluída com sucesso.',
       order
     });

@@ -1,15 +1,15 @@
 import { connect, disconnect } from '../../../database/mongodb.js';
-import editOrder from '../services/editOrder.js'
+import createOrder from '../services/createOrder.js'
 
 export default async (req, res, next) => {
-  const { body, params: { order_id } } = req
+  const { body } = req
 
   try {
     await connect();
-    const order = await editOrder(order_id, body)
+    const order = await createProduct(body)
     await disconnect();
 
-    return res.status(200).json({
+    res.status(201).json({
       message: 'Pedido criado com sucesso.',
       order
     });
